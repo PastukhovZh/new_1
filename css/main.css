@@ -82,10 +82,6 @@ textarea {
   padding-bottom: 82px;
 }
 
-.container {
-  border: 2px solid tomato;
-}
-
 .region-title {
   font-weight: var(--subtitle-font-weight);
   font-size: 52px;
