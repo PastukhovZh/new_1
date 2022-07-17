@@ -79,6 +79,7 @@
   .region-overlay__hidden:hover &,
   .region-overlay__hidden:focus & {
     // transform: translateY(1);
+
     opacity: 1;
   }
 }
