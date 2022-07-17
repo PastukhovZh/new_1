@@ -1,4 +1,11 @@
 @import "./base/common";
 @import "./base/reset";
+/////////////////////////////////////////////////
 @import "./components/container";
+/////////////////////////////////////////////////
+@import "./utils/hidden";
+@import "./utils/mixins";
+@import "./utils/vars";
+/////////////////////////////////////////////////
 @import "./layout/header";
+@import "./layout/map";
