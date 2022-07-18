@@ -1,0 +1,30 @@
+.hero {
+  width: 1440px;
+  height: 900px;
+
+  background-image: url(/image/hero/hero-title-1.jpg);
+}
+
+.hero-title {
+  min-width: 1021px;
+  font-weight: var(--title-font-weight);
+  font-size: 128px;
+  line-height: 150px;
+  padding-top: 331px;
+  padding-left: 100px;
+
+  background: linear-gradient(
+    90.96deg,
+    rgba(150, 242, 248, 0.85) 43.11%,
+    rgba(255, 255, 255, 0.85) 74.76%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  .hero-title-part {
+    font-size: 80px;
+    line-height: 94px;
+  }
+}
