@@ -1,9 +1,22 @@
 .header {
-  background-color: rgba(0, 0, 0, 0.288);
+  // background-color: rgba(0, 0, 0, 0.288);
+}
+.header > .container {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+
+.wrap {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  padding-left: 135px;
+  padding-right: 135px;
 }
+
 .header--wrapper {
   display: flex;
 }
