@@ -4,6 +4,7 @@ const westernEurope = document.querySelector('#western-europe');
 const asia = document.querySelector('#asia');
 const nearEast = document.querySelector('#near-east');
 const africa = document.querySelector('#africa');
+// const touchBarNav = document.querySelector('.region-nav')
 
 const regionList = document.querySelector('.region-wrap');
 
@@ -353,7 +354,7 @@ const renderNearEast = `<ul class="region-image__list">
           <li class="region-image__item">
             <div class="region-overlay__hidden">
               <img
-                src="./image/region-image/near-east/turkey"
+                src="./image/region-image/near-east/turkey.jpg"
                 alt="turkey"
                 class="region-image"
               />
@@ -382,7 +383,7 @@ const renderAfrica =`<ul class="region-image__list">
                 </a>
               </div>
             </div>
-            <p class="region-image__text">Morocco</p>/
+            <p class="region-image__text">Morocco</p>
         </ul>`;
   
   
@@ -392,38 +393,78 @@ asia.addEventListener('click', renderMapInAsia);
 nearEast.addEventListener('click', renderMapInNearEast);
 africa.addEventListener('click', renderMapInAfrica);
 
+// function clickToButtonVisited(e) {
 
-function renderMapInEasternEurope(){
-  if(renderEasternEurope){
-    regionList.innerHTML = ''
+//   // if (e.target.nodeName !== "BUTTON") {
+//   //   return
+//   // }
+//   const btn = e.target;
+//   btn.classList.add('visited')
+//   if (btn.classList.contains("visited")) {
+//     btn.classList.remove('visited')
+//   }
+  
+//   // btn.classList.toggle('visited')
+// }
+// touchBarNav.addEventListener('click', clickToButtonVisited)
+
+
+function renderMapInEasternEurope() {
+  easternEurope.classList.add('visited');
+  if (renderEasternEurope) {
+    westernEurope.classList.remove('visited');
+    asia.classList.remove('visited');
+    nearEast.classList.remove('visited');
+    africa.classList.remove('visited');
+    regionList.innerHTML = '';
     regionList.insertAdjacentHTML('beforeend', renderEasternEurope);
     return
   }
 }
 function renderMapInWesternEurope() {
-  if(renderWesternEurope){
-    regionList.innerHTML = ''
+  westernEurope.classList.add('visited');
+  if (renderWesternEurope) {
+    easternEurope.classList.remove('visited');
+    asia.classList.remove('visited');
+    nearEast.classList.remove('visited');
+    africa.classList.remove('visited');
+    regionList.innerHTML = '';
     regionList.insertAdjacentHTML('beforeend', renderWesternEurope);
     return
   }
 }
-function renderMapInAsia(){
-  if(renderEasternEurope){
-    regionList.innerHTML = ''
+function renderMapInAsia() {
+    asia.classList.add('visited');
+  if (renderAsia) {
+    easternEurope.classList.remove('visited');
+    westernEurope.classList.remove('visited');
+    nearEast.classList.remove('visited');
+    africa.classList.remove('visited');
+    regionList.innerHTML = '';
     regionList.insertAdjacentHTML('beforeend', renderAsia);
     return
   }
 }
-function renderMapInNearEast(){
-  if(renderEasternEurope){
-    regionList.innerHTML = ''
+function renderMapInNearEast() {
+  nearEast.classList.add('visited');
+  if (renderNearEast) {
+        easternEurope.classList.remove('visited');
+    westernEurope.classList.remove('visited');
+    asia.classList.remove('visited');
+    africa.classList.remove('visited');
+    regionList.innerHTML = '';
     regionList.insertAdjacentHTML('beforeend', renderNearEast);
     return
   }
 }
-function renderMapInAfrica(){
-  if(renderEasternEurope){
-    regionList.innerHTML = ''
+function renderMapInAfrica() {
+  africa.classList.add('visited');
+  if (renderAfrica) {
+    easternEurope.classList.remove('visited');
+    westernEurope.classList.remove('visited');
+    asia.classList.remove('visited');
+    nearEast.classList.remove('visited');
+    regionList.innerHTML = '';
     regionList.insertAdjacentHTML('beforeend', renderAfrica);
     return
   }
