@@ -1,4 +1,6 @@
 // import { renderMap } from './js/renderMap';
+
+
 const easternEurope = document.querySelector('#easternEurope');
 const westernEurope = document.querySelector('#western-europe');
 const asia = document.querySelector('#asia');
@@ -392,22 +394,6 @@ westernEurope.addEventListener('click', renderMapInWesternEurope);
 asia.addEventListener('click', renderMapInAsia);
 nearEast.addEventListener('click', renderMapInNearEast);
 africa.addEventListener('click', renderMapInAfrica);
-
-// function clickToButtonVisited(e) {
-
-//   // if (e.target.nodeName !== "BUTTON") {
-//   //   return
-//   // }
-//   const btn = e.target;
-//   btn.classList.add('visited')
-//   if (btn.classList.contains("visited")) {
-//     btn.classList.remove('visited')
-//   }
-  
-//   // btn.classList.toggle('visited')
-// }
-// touchBarNav.addEventListener('click', clickToButtonVisited)
-
 
 function renderMapInEasternEurope() {
   easternEurope.classList.add('visited');

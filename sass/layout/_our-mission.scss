@@ -1,0 +1,26 @@
+.our-mission {
+  position: relative;
+  padding-top: 111px;
+  padding-bottom: 156px;
+}
+.our-mission-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 38px;
+}
+.our-mission-title {
+  font-weight: var(--subtitle-font-weight);
+  font-size: 52px;
+  line-height: 61px;
+}
+.our-mission-subtitle {
+  font-weight: var(--secondary-font-weight);
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+}
+.our-mission-img {
+  width: 1170px;
+  height: 581px;
+}
