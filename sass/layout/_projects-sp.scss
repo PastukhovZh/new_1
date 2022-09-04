@@ -1,6 +1,6 @@
 .project-sp {
   position: relative;
-  padding-top: 142px;
+  padding-top: 40px;
   padding-bottom: 192px;
   //   height: 900px;
 }
@@ -9,12 +9,12 @@
   font-size: 24px;
   line-height: 28px;
   letter-spacing: 0.05em;
-  margin-left: 113px;
+  margin-left: 160px;
   margin-bottom: 43px;
   color: #323232;
 }
 .project-sp-img {
-  margin: 0 auto;
+  margin-left: 145px;
 
   width: 967px;
   height: 507px;
@@ -47,7 +47,7 @@
   width: 221px;
   height: 377px;
   left: 24px;
-  top: 0px;
+  top: -40px;
 
   font-family: "Roboto";
   font-style: normal;
@@ -59,4 +59,28 @@
   color: rgba(179, 179, 179, 0.15);
 
   filter: blur(8px);
+}
+
+.sp-slider {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 80px;
+}
+
+.sp-slider > .slider-item:not(:last-child) {
+  margin-left: 40px;
+}
+
+.project-sp-icon-right {
+  background-color: transparent;
+  position: absolute;
+  bottom: 260px;
+  left: 625px;
+}
+.project-sp-icon-left {
+  background-color: transparent;
+
+  position: absolute;
+  left: 155px;
+  bottom: 260px;
 }

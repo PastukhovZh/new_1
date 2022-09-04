@@ -1,6 +1,5 @@
-export {project}
-
-const firstPageFirstProject = `<div class="project-fp-titles-wrap" id = "#first">
+export {renderNextPageProjectsFP, renderPreviousPageProjectsFP}
+const firstPageFirstProject = `<div class="project-fp-titles-wrap">
         <h2 class="projects-fp-title">Our projects</h2>
         <p class="projects-fp-subtitle">UKRAINIAN BOOKSHELF</p>
       </div>
@@ -23,22 +22,9 @@ const firstPageFirstProject = `<div class="project-fp-titles-wrap" id = "#first"
           distribution of Ukrainian literature in the original and translations
           in the world's leading libraries.
         </p>
-        <button type="button"data-button-right>
-        <svg class="project-icon-right" width="40px" height="40px">
-          <use href="./image/icon.svg#icon-arrow-right"></use>
-        </svg>
-        </button>
-        <button type="button"data-button-left><svg
-          class="project-icon-left visually-hidden"
-          width="40px"
-          height="40px"
-        >
-        </button>
-          <use href="./image/icon.svg#icon-arrow-left"></use>
-        </svg>
       </div>`;
 
-const firstPageSecondProject = `<div class="project-fp-titles-wrap" id = "#second">
+const firstPageSecondProject = `<div class="project-fp-titles-wrap">
         <h2 class="projects-fp-title">Our projects</h2>
       </div>
       <img
@@ -62,7 +48,7 @@ const firstPageSecondProject = `<div class="project-fp-titles-wrap" id = "#secon
         </p>
       </div>`;
 
-const firstPageThirdProject = `<div class="project-fp-titles-wrap" id = "#third">
+const firstPageThirdProject = `<div class="project-fp-titles-wrap">
         <h2 class="projects-fp-title">Our projects</h2>
       </div>
       <img
@@ -86,7 +72,7 @@ const firstPageThirdProject = `<div class="project-fp-titles-wrap" id = "#third"
         </p>
       </div>`;
 
-const firstPageFourthProject = `<div class="project-fp-titles-wrap" id = "#fourth">
+const firstPageFourthProject = `<div class="project-fp-titles-wrap">
         <h2 class="projects-fp-title">Our projects</h2>
       </div>
       <img
@@ -110,41 +96,65 @@ const firstPageFourthProject = `<div class="project-fp-titles-wrap" id = "#fourt
         </p>
       </div>`
 
+const renderProjectsOfFP = document.querySelector('.render-fp-wrap')
+const btnRightFP = document.querySelector("[data-button-right-fp");
+const btnLeftFP = document.querySelector("[data-button-left-fp");
 
-// const first = document.querySelector('#first');
-// const second = document.querySelector('#second');
-// const third = document.querySelector('#third');
-// const fourth = document.querySelector('#fourth');
+btnRightFP.addEventListener('click', renderNextPageProjectsFP);
+btnLeftFP.addEventListener('click', renderPreviousPageProjectsFP);
 
-const firstPageProject = document.querySelector('.projects-fp')
-const btnRight = document.querySelector("[data-button-right]");
-const btnLeft = document.querySelector("[data-button-left]");
+btnLeftFP.classList.add('visually-hidden')
 
-btnRight.addEventListener('click', renderNextPageProjects);
-// btnLeft.addEventListener('click', renderPreviousPageProjects);
+function renderNextPageProjectsFP() {
 
+  if (renderProjectsOfFP.classList.contains('first-project')) {
+    renderProjectsOfFP.classList.remove('first-project');
+    renderProjectsOfFP.classList.add('second-project');
+    btnLeftFP.classList.remove('visually-hidden');
 
-function renderNextPageProjects() {
-  if (firstPageFirstProject) {
-      firstPageProject.innerHTML = '';
-    firstPageProject.insertAdjacentHTML('beforeend', firstPageSecondProject);
-    console.log(firstPageProject === firstPageSecondProject)
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageSecondProject);
+    return
+    }
+  else if (renderProjectsOfFP.classList.contains('second-project')) {
+        renderProjectsOfFP.classList.remove('second-project');
+    renderProjectsOfFP.classList.add('third-project');
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageThirdProject);
     return
   }
-  else if (firstPageSecondProject) {
-    firstPageProject.innerHTML = '';
-    firstPageProject.insertAdjacentHTML('beforeend', firstPageThirdProject);
-    return
-  }
-  else if (firstPageThirdProject) {
-    firstPageProject.innerHTML = '';
-    firstPageProject.insertAdjacentHTML('beforeend', firstPageFourthProject)
+  else if (renderProjectsOfFP.classList.contains('third-project')) {
+    btnRightFP.classList.add('visually-hidden')
+    renderProjectsOfFP.classList.remove('third-project');
+    renderProjectsOfFP.classList.add('fourth-project');
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageFourthProject);
     return
   }
   return
-// console.log(classList.contains('.second'))
 }
-// console.log(firstPageFirstProject)
 
-function renderPreviousPageProjects() {
+function renderPreviousPageProjectsFP() {
+  if (renderProjectsOfFP.classList.contains('fourth-project')) {
+    btnRightFP.classList.remove('visually-hidden');
+    renderProjectsOfFP.classList.add('third-project');
+    renderProjectsOfFP.classList.remove('fourth-project');
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageThirdProject);
+    return
+  } else if (renderProjectsOfFP.classList.contains('third-project')) {
+    renderProjectsOfFP.classList.add('second-project');
+    renderProjectsOfFP.classList.remove('third-project');
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageSecondProject);
+    return
+  } else if (renderProjectsOfFP.classList.contains('second-project')) {
+    renderProjectsOfFP.classList.add('first-project');
+    renderProjectsOfFP.classList.remove('second-project');
+    renderProjectsOfFP.innerHTML = '';
+    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageFirstProject);  
+    btnLeftFP.classList.add('visually-hidden');
+    return
+  }
+  return
 }

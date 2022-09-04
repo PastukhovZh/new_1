@@ -2,6 +2,9 @@
   position: relative;
   padding-top: 40px;
   padding-bottom: 192px;
+  & > button {
+    background-color: transparent;
+  }
 }
 
 .project-fp-titles-wrap {
@@ -67,17 +70,10 @@
 .fp-slider {
   display: flex;
 }
-.slider-item {
-  margin-left: 20px;
-  margin-top: 38px;
-  display: block;
-  background-color: #d1d1d1;
-  width: 54px;
-  height: 12px;
-  &:not(:last-child) {
-    margin-right: 30px;
-  }
+.fp-slider > .slider-item:not(:first-child) {
+  margin-left: 40px;
 }
+
 .active {
   width: 186px;
   background-color: #96f2f8;
@@ -85,12 +81,12 @@
 
 .project-icon-right {
   position: absolute;
-  top: 100px;
-  right: 10px;
+  top: 540px;
+  right: 215px;
 }
 
 .project-icon-left {
   position: absolute;
-  top: 100px;
-  left: 10px;
+  top: 540px;
+  left: 685px;
 }

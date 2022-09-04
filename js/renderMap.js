@@ -1,4 +1,4 @@
-export { renderMap };
+export { renderMapInEasternEurope, renderMapInWesternEurope, renderMapInAsia, renderMapInNearEast, renderMapInAfricax  };
 
 const easternEurope = document.querySelector('#easternEurope');
 const westernEurope = document.querySelector('#western-europe');
