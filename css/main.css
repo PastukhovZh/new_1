@@ -100,6 +100,11 @@ textarea {
   height: 12px;
 }
 
+.her {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .hero {
   width: 1440px;
   height: 900px;
@@ -109,13 +114,31 @@ textarea {
   background-size: contain;
 }
 
+.hero2 {
+  width: 1440px;
+  height: 900px;
+  background-image: linear-gradient(135.35deg, rgba(72, 72, 72, 0.2) 22.93%, rgba(72, 72, 72, 0) 37.65%), linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), url(../image/hero/hero-title-2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.hero3 {
+  width: 1440px;
+  height: 900px;
+  background-image: linear-gradient(135.35deg, rgba(72, 72, 72, 0.2) 22.93%, rgba(72, 72, 72, 0) 37.65%), linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), url(../image/hero/hero-title-3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .hero-title {
   min-width: 1021px;
   font-weight: var(--title-font-weight);
-  font-size: 128px;
-  line-height: 150px;
+  font-size: 80px;
+  line-height: 94px;
   padding-top: 331px;
-  padding-left: 100px;
+  padding-left: 250px;
   background: linear-gradient(90.96deg, rgba(150, 242, 248, 0.85) 43.11%, rgba(255, 255, 255, 0.85) 74.76%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -123,14 +146,137 @@ textarea {
   text-fill-color: transparent;
 }
 .hero-title .hero-title-part {
-  font-size: 80px;
-  line-height: 94px;
+  font-size: 128px;
+  line-height: 150px;
+}
+
+/*!
+* ItcSlider
+*   site: https://itchief.ru/javascript/slider
+*   github: https://github.com/itchief/ui-components
+*
+* Copyright 2018-2022 Alexander Maltsev
+* Licensed under MIT (https://github.com/itchief/ui-components/blob/master/LICENSE)
+*/
+.slider__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider__container {
+  overflow: hidden;
+}
+
+.slider__wrapper {
+  /* overflow: hidden; */
+}
+
+.slider__items {
+  display: flex;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.slider_disable-transition {
+  transition: none;
+}
+
+.slider__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  user-select: none;
+  will-change: transform;
+}
+
+/* кнопки влево и вправо */
+.slider__control {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.slider__control_hide {
+  display: none;
+}
+
+.slider__control[data-slide=prev] {
+  left: 0;
+}
+
+.slider__control[data-slide=next] {
+  right: 0;
+}
+
+.slider__control:hover,
+.slider__control:focus {
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.3);
+  outline: 0;
+}
+
+.slider__control::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: transparent no-repeat center center;
+  background-size: 100% 100%;
+}
+
+/* индикаторы */
+.slider__indicators {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  margin: 0 15%;
+  padding-left: 0;
+  list-style: none;
+}
+
+.slider__indicators li {
+  flex: 0 1 auto;
+  box-sizing: content-box;
+  width: 30px;
+  height: 5px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  cursor: pointer;
+}
+
+.slider__indicators li.active {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .header > .container {
   position: relative;
   display: flex;
   justify-content: space-around;
+  z-index: 999;
 }
 
 .wrap {

@@ -1,783 +1,347 @@
-const easternEurope = document.querySelector('#easternEurope');
-const westernEurope = document.querySelector('#western-europe');
-const asia = document.querySelector('#asia');
-const nearEast = document.querySelector('#near-east');
-const africa = document.querySelector('#africa');
-// const touchBarNav = document.querySelector('.region-nav')
+/**
+ * ItcSlider by itchief (https://github.com/itchief/ui-components/tree/master/itc-slider)
+ * Copyright 2020 - 2022 Alexander Maltsev
+ * Licensed under MIT (https://github.com/itchief/ui-components/blob/master/LICENSE)
+ */
 
-const regionList = document.querySelector('.region-wrap');
+class ItcSlider {
+  static CLASS_CONTROL = 'slider__control';
+  static CLASS_CONTROL_HIDE = 'slider__control_hide';
+  static CLASS_ITEM_ACTIVE = 'slider__item_active';
+  static CLASS_INDICATOR_ACTIVE = 'active';
+  static SEL_WRAPPER = '.slider__wrapper';
+  static SEL_ITEM = '.slider__item';
+  static SEL_ITEMS = '.slider__items';
+  static SEL_PREV = '.slider__control[data-slide="prev"]';
+  static SEL_NEXT = '.slider__control[data-slide="next"]';
+  static SEL_INDICATOR = '.slider__indicators>li';
+  static TRANSITION_OFF = 'slider_disable-transition';
 
-const renderEasternEurope = `<ul class="region-image__list">
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/czech-republic.jpg"
-                alt="czech-republic"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Czech Republic</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/estonia.jpg"
-                alt="estonia"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Estonia</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/latvia.jpg"
-                alt="latvia"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Latvia</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/lithuania.jpg"
-                alt="lithuania"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Lithuania</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/moldova.jpg"
-                alt="moldova"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a
-                  href="https://www.google.com/maps/place/Strada+Columna+171,+Chișinău,+Молдавия/@47.0362691,28.8208407,17z/data=!3m1!4b1!4m5!3m4!1s0x40c97db9c5557641:0x87ccdad7f6c5bab8!8m2!3d47.0362691!4d28.8208407"
-                  class="region-overlay__info"
-                >
-                  Str. Columna 171, Chisinau, Moldova, 2004
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Moldova</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/poland.jpg"
-                alt="poland"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Poland</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/eastern-europe/romania.jpg"
-                alt="romania"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Bucureşti, Bd. Unirii, nr. 22, sector 3, 030833
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Romania</p>
-          </li>
-        </ul>`;
-const renderWesternEurope = `<ul class="region-image__list">
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/cyprus.jpg"
-                alt="cyprus"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Cyprus</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/denmark.jpg"
-                alt="denmark"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Denmark</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/england.jpg"
-                alt="england"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">England</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/finland.jpg"
-                alt="finland"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Finland</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/france.jpg"
-                alt="france"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a
-                  href="https://www.google.com/maps/place/Strada+Columna+171,+Chișinău,+Молдавия/@47.0362691,28.8208407,17z/data=!3m1!4b1!4m5!3m4!1s0x40c97db9c5557641:0x87ccdad7f6c5bab8!8m2!3d47.0362691!4d28.8208407"
-                  class="region-overlay__info"
-                >
-                  Str. Columna 171, Chisinau, Moldova, 2004
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">France</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/germany.jpg"
-                alt="germany"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Germany</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/italy.jpg"
-                alt="italy"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Bucureşti, Bd. Unirii, nr. 22, sector 3, 030833
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Italy</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/norway.jpg"
-                alt="norway"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Bucureşti, Bd. Unirii, nr. 22, sector 3, 030833
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Norway</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/western-europe/sweden.jpg"
-                alt="sweden"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Bucureşti, Bd. Unirii, nr. 22, sector 3, 030833
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Sweden</p>
-          </li>
-        </ul>`;
-const renderAsia = `<ul class="region-image__list">
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/asia/japan.jpg"
-                alt="japan"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Japan</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/asia/singapore.jpg"
-                alt="singapore"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Singapore</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/asia/uzbekistan.jpg"
-                alt="uzbekistan"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Uzbekistan</p>
-          </li>
-        </ul>`;
-const renderNearEast = `<ul class="region-image__list">
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/near-east/israel.jpg"
-                alt="israel"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Israel</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/near-east/jordan.jpg"
-                alt="jordan"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Jordan</p>
-          </li>
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/near-east/turkey.jpg"
-                alt="turkey"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Turkey</p>
-          </li>
-        </ul>`;
-const renderAfrica =`<ul class="region-image__list">
-          <li class="region-image__item">
-            <div class="region-overlay__hidden">
-              <img
-                src="./image/region-image/africa/morocco.jpg"
-                alt="morocco"
-                class="region-image"
-              />
-              <div class="region-overlay">
-                <a href="" class="region-overlay__info">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus nostrum quia pariatur. Accusamus, ratione dolore.
-                </a>
-              </div>
-            </div>
-            <p class="region-image__text">Morocco</p>
-        </ul>`;
-  
-  
-easternEurope.addEventListener('click', renderMapInEasternEurope);
-westernEurope.addEventListener('click', renderMapInWesternEurope);
-asia.addEventListener('click', renderMapInAsia);
-nearEast.addEventListener('click', renderMapInNearEast);
-africa.addEventListener('click', renderMapInAfrica);
+  static contains = [];
 
-function renderMapInEasternEurope() {
-  easternEurope.classList.add('visited');
-  if (renderEasternEurope) {
-    westernEurope.classList.remove('visited');
-    asia.classList.remove('visited');
-    nearEast.classList.remove('visited');
-    africa.classList.remove('visited');
-    regionList.innerHTML = '';
-    regionList.insertAdjacentHTML('beforeend', renderEasternEurope);
-    return
+  static createInstances() {
+    document.querySelectorAll('[data-slider="itc-slider"]').forEach((el) => {
+      if (this.contains.find((item) => item.el === el)) {
+        return;
+      }
+      const dataset = el.dataset;
+      const params = {};
+      Object.keys(dataset).forEach((key) => {
+        if (key === 'slider') {
+          return;
+        }
+        let value = dataset[key];
+        value = value === 'true' ? true : value;
+        value = value === 'false' ? false : value;
+        value = Number.isNaN(Number(value)) ? Number(value) : value;
+        params[key] = value;
+      });
+      this.contains.push({ el, slider: new ItcSlider(el, params) });
+      el.dataset.sliderId = this.contains.length;
+      el.querySelectorAll('.slider__control').forEach((btn) => {
+        btn.dataset.sliderTarget = this.contains.length;
+      });
+    });
   }
-}
-function renderMapInWesternEurope() {
-  westernEurope.classList.add('visited');
-  if (renderWesternEurope) {
-    easternEurope.classList.remove('visited');
-    asia.classList.remove('visited');
-    nearEast.classList.remove('visited');
-    africa.classList.remove('visited');
-    regionList.innerHTML = '';
-    regionList.insertAdjacentHTML('beforeend', renderWesternEurope);
-    return
+
+  constructor(selector, config) {
+    this._el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    this._elWrapper = this._el.querySelector(ItcSlider.SEL_WRAPPER);
+    this._elItems = this._el.querySelector(ItcSlider.SEL_ITEMS);
+    this._elsItem = this._el.querySelectorAll(ItcSlider.SEL_ITEM);
+    this._elsIndicator = this._el.querySelectorAll(ItcSlider.SEL_INDICATOR);
+    this._btnPrev = this._el.querySelector(ItcSlider.SEL_PREV);
+    this._btnNext = this._el.querySelector(ItcSlider.SEL_NEXT);
+
+    this._exOrderMin = 0;
+    this._exOrderMax = 0;
+    this._exItemMin = null;
+    this._exItemMax = null;
+    this._exTranslateMin = 0;
+    this._exTranslateMax = 0;
+
+    const styleElItems = window.getComputedStyle(this._elItems);
+    this._delay = Math.round(parseFloat(styleElItems.transitionDuration) * 200);
+
+    this._direction = 'next';
+
+    this._intervalId = null;
+
+    this._isSwiping = false;
+    this._swipeX = 0;
+
+    this._config = {
+      loop: true,
+      autoplay: false,
+      interval: 5000,
+      refresh: true,
+      swipe: true,
+      ...config
+    };
+
+    this._setInitialValues();
+    this._addEventListener();
   }
-}
-function renderMapInAsia() {
-    asia.classList.add('visited');
-  if (renderAsia) {
-    easternEurope.classList.remove('visited');
-    westernEurope.classList.remove('visited');
-    nearEast.classList.remove('visited');
-    africa.classList.remove('visited');
-    regionList.innerHTML = '';
-    regionList.insertAdjacentHTML('beforeend', renderAsia);
-    return
-  }
-}
-function renderMapInNearEast() {
-  nearEast.classList.add('visited');
-  if (renderNearEast) {
-        easternEurope.classList.remove('visited');
-    westernEurope.classList.remove('visited');
-    asia.classList.remove('visited');
-    africa.classList.remove('visited');
-    regionList.innerHTML = '';
-    regionList.insertAdjacentHTML('beforeend', renderNearEast);
-    return
-  }
-}
-function renderMapInAfrica() {
-  africa.classList.add('visited');
-  if (renderAfrica) {
-    easternEurope.classList.remove('visited');
-    westernEurope.classList.remove('visited');
-    asia.classList.remove('visited');
-    nearEast.classList.remove('visited');
-    regionList.innerHTML = '';
-    regionList.insertAdjacentHTML('beforeend', renderAfrica);
-    return
-  }
-}
 
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////// P R O J E C T S //////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////F I R S T //// P A G E //////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-
-
-const firstPageFirstProject = `<div class="project-fp-titles-wrap">
-        <h2 class="projects-fp-title">Our projects</h2>
-        <p class="projects-fp-subtitle">UKRAINIAN BOOKSHELF</p>
-      </div>
-      <img
-        src="./image/projects/page-1/img-project-fp-1.jpg"
-        alt="In library"
-        class="projects-fp-img"
-      />
-      <div class="fp-slider">
-        <span class="slider-item active"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-      </div>
-      <div class="projects-fp-info-wrap">
-        <p class="projects-fp-info">
-          One by one, "Ukrainian bookshelves" are being opened in the libraries
-          of Europe. This project was planned even before the beginning of the
-          full-scale Russian invasion of Ukraine and provided for the
-          distribution of Ukrainian literature in the original and translations
-          in the world's leading libraries.
-        </p>
-      </div>`;
-
-const firstPageSecondProject = `<div class="project-fp-titles-wrap">
-        <h2 class="projects-fp-title">Our projects</h2>
-      </div>
-      <img
-        src="./image/projects/page-1/img-project-fp-2.jpg"
-        alt="Kyiv street art"
-        class="projects-fp-img"
-      />
-      <div class="fp-slider">
-        <span class="slider-item"></span>
-        <span class="slider-item active"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-      </div>
-      <div class="projects-fp-info-wrap">
-        <p class="projects-fp-info">
-          The project, initiated by the First Lady of Ukraine Olena Zelenska
-          together with the Ministry of Foreign Affairs of Ukraine, the Ministry
-          of Culture and Information Policy of Ukraine, as well as the Ukrainian
-          Book Institute together with Ukrainian embassies abroad, has already
-          been supported in 10 countries.
-        </p>
-      </div>`;
-
-const firstPageThirdProject = `<div class="project-fp-titles-wrap">
-        <h2 class="projects-fp-title">Our projects</h2>
-      </div>
-      <img
-        src="./image/projects/page-1/img-project-fp-3.jpg"
-        alt="books"
-        class="projects-fp-img"
-      />
-      <div class="fp-slider">
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item active"></span>
-        <span class="slider-item"></span>
-      </div>
-      <div class="projects-fp-info-wrap">
-        <p class="projects-fp-info">
-          The first "Ukrainian bookshelves" appeared in Austria, Latvia, the
-          Netherlands and France. Most recently, the project was launched in
-          Estonia, Lithuania, Slovakia, Turkey and Sweden, and already existing
-          shelves were filled in the Czech Republic. The shelves will soon
-          appear in the network of city libraries in Vienna.
-        </p>
-      </div>`;
-
-const firstPageFourthProject = `<div class="project-fp-titles-wrap">
-        <h2 class="projects-fp-title">Our projects</h2>
-      </div>
-      <img
-        src="./image/projects/page-1/img-project-fp-4.jpg"
-        alt="library"
-        class="projects-fp-img"
-      />
-      <div class="fp-slider">
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item"></span>
-        <span class="slider-item active"></span>
-      </div>
-      <div class="projects-fp-info-wrap">
-        <p class="projects-fp-info">
-          Recently "Ukrainian Bookshelf" opened in France, Austria, Latvia and
-          the Netherlands. The Paris Pompidou Center has been replenished with
-          about 40 books in English and French about the culture, nature and art
-          of our country. In the National Library of Austria, visitors can
-          familiarize themselves with the works of Taras Shevchenko,
-        </p>
-      </div>`
-
-const renderProjectsOfFP = document.querySelector('.render-fp-wrap')
-const btnRightFP = document.querySelector("[data-button-right-fp");
-const btnLeftFP = document.querySelector("[data-button-left-fp");
-
-btnRightFP.addEventListener('click', renderNextPageProjectsFP);
-btnLeftFP.addEventListener('click', renderPreviousPageProjectsFP);
-
-btnLeftFP.classList.add('visually-hidden')
-
-function renderNextPageProjectsFP() {
-
-  if (renderProjectsOfFP.classList.contains('first-project')) {
-    renderProjectsOfFP.classList.remove('first-project');
-    renderProjectsOfFP.classList.add('second-project');
-    btnLeftFP.classList.remove('visually-hidden');
-
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageSecondProject);
-    return
+  _addEventListener() {
+    this._el.addEventListener('click', (e) => {
+      this._autoplay('stop');
+      if (e.target.classList.contains(ItcSlider.CLASS_CONTROL)) {
+        e.preventDefault();
+        this._direction = e.target.dataset.slide;
+        this._move();
+      } else if (e.target.dataset.slideTo) {
+        const index = parseInt(e.target.dataset.slideTo, 10);
+        this._moveTo(index);
+      }
+      this._config.loop ? this._autoplay() : null;
+    });
+    this._el.addEventListener('mouseenter', () => {
+      this._autoplay('stop');
+    });
+    this._el.addEventListener('mouseleave', () => {
+      this._autoplay();
+    });
+    if (this._config.refresh) {
+      window.addEventListener('resize', () => {
+        window.requestAnimationFrame(this._reset.bind(this));
+      });
     }
-  else if (renderProjectsOfFP.classList.contains('second-project')) {
-        renderProjectsOfFP.classList.remove('second-project');
-    renderProjectsOfFP.classList.add('third-project');
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageThirdProject);
-    return
-  }
-  else if (renderProjectsOfFP.classList.contains('third-project')) {
-    btnRightFP.classList.add('visually-hidden')
-    renderProjectsOfFP.classList.remove('third-project');
-    renderProjectsOfFP.classList.add('fourth-project');
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageFourthProject);
-    return
-  }
-  return
-}
-
-function renderPreviousPageProjectsFP() {
-  if (renderProjectsOfFP.classList.contains('fourth-project')) {
-    btnRightFP.classList.remove('visually-hidden');
-    renderProjectsOfFP.classList.add('third-project');
-    renderProjectsOfFP.classList.remove('fourth-project');
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageThirdProject);
-    return
-  } else if (renderProjectsOfFP.classList.contains('third-project')) {
-    renderProjectsOfFP.classList.add('second-project');
-    renderProjectsOfFP.classList.remove('third-project');
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageSecondProject);
-    return
-  } else if (renderProjectsOfFP.classList.contains('second-project')) {
-    renderProjectsOfFP.classList.add('first-project');
-    renderProjectsOfFP.classList.remove('second-project');
-    renderProjectsOfFP.innerHTML = '';
-    renderProjectsOfFP.insertAdjacentHTML('beforeend', firstPageFirstProject);  
-    btnLeftFP.classList.add('visually-hidden');
-    return
-  }
-  return
-}
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////// P R O J E C T S //////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////// S E C O N D //// P A G E /////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-
-
-
-const secondPageFirstProject = `<div class="render-sp-wrap first-project">
-        <h3 class="visually-hidden">Our book</h3>
-        <p class="project-sp-subtitle">BOOKS WITHOUT BORDERS</p>
-        <img
-          src="./image/projects/page-2/img-project-sp-1.jpg"
-          alt="children's books"
-          class="project-sp-img"
-        />
-        <div class="sp-slider">
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item active"></span>
-        </div>
-        <div class="project-sp-info-wrap">
-          <p class="project-sp-info">
-            Another humanitarian and important project, initiated by the first
-            lady of Ukraine Olena Zelenska, saw the light already with the
-            beginning of the war. The "Books without borders" project is
-            implemented in 11 countries of the world and has 80,000 printed
-            books.
-          </p>
-        </div>
-      </div>`;
-
-const secondPageSecondProject = `<div class="render-sp-wrap first-project">
-        <h3 class="visually-hidden">Our book</h3>
-        <p class="project-sp-subtitle">BOOKS WITHOUT BORDERS</p>
-        <img
-          src="./image/projects/page-2/img-project-sp-2.jpg"
-          alt="book's maker"
-          class="project-sp-img"
-        />
-        <div class="sp-slider">
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item active"></span>
-          <span class="slider-item"></span>
-        </div>
-        <div class="project-sp-info-wrap">
-          <p class="project-sp-info">
-            Olena Zelenska saya, the project works like this: Ukrainian publishing houses provide ready-made layouts of their bright and beautifully designed books, and then Ukrainian embassies negotiate/look for partners among foreign printers that produce these books.
-          </p>
-        </div>
-      </div>`;
-
-const secondPageThirdProject = `<div class="render-sp-wrap first-project">
-        <h3 class="visually-hidden">Our book</h3>
-        <p class="project-sp-subtitle">BOOKS WITHOUT BORDERS</p>
-        <img
-          src="./image/projects/page-2/img-project-sp-3.jpg"
-          alt="children's gift"
-          class="project-sp-img"
-        />
-        <div class="sp-slider">
-          <span class="slider-item"></span>
-          <span class="slider-item active"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-        </div>
-        <div class="project-sp-info-wrap">
-          <p class="project-sp-info">
-            Children who left their homes because of the war did not take books with them. Their families often evacuated with nothing at all. And now a children's book in the native language can become a part of home, peace, a moment of tranquility. This is precisely why our project "Books without borders".
-          </p>
-        </div>
-      </div>`; 
-
-const secondPageFourthProject = `<div class="render-sp-wrap first-project">
-        <h3 class="visually-hidden">Our book</h3>
-        <p class="project-sp-subtitle">BOOKS WITHOUT BORDERS</p>
-        <img
-          src="./image/projects/page-2/img-project-sp-4.jpg"
-          alt="happy children"
-          class="project-sp-img"
-        />
-        <div class="sp-slider">
-          <span class="slider-item active"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-          <span class="slider-item"></span>
-        </div>
-        <div class="project-sp-info-wrap">
-          <p class="project-sp-info">
-            "This bright world, inhabited by baby elephants and magical lions, does not and cannot have borders. It will only expand, because right now dozens of countries are joining the project," the President's wife wrote.
-          </p>
-        </div>
-      </div>`
-
-const renderProjectsOfSP = document.querySelector('.render-sp-wrap')
-const btnRightSP = document.querySelector("[data-button-right-sp");
-const btnLeftSP = document.querySelector("[data-button-left-sp");
-
-btnRightSP.addEventListener('click', renderNextPageProjectsSP);
-btnLeftSP.addEventListener('click', renderPreviousPageProjectsSP);
-
-btnLeftSP.classList.add('visually-hidden');
-
-function renderNextPageProjectsSP() {
-
-  if (renderProjectsOfSP.classList.contains('first-project')) {
-    renderProjectsOfSP.classList.remove('first-project');
-    renderProjectsOfSP.classList.add('second-project');
-    btnLeftSP.classList.remove('visually-hidden');
-
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageSecondProject);
-    return
+    if (this._config.loop) {
+      this._elItems.addEventListener('itcslider-start', () => {
+        if (this._isBalancing) {
+          return;
+        }
+        this._isBalancing = true;
+        window.requestAnimationFrame(this._balanceItems.bind(this));
+      });
+      this._elItems.addEventListener('transitionend', () => {
+        this._isBalancing = false;
+      });
     }
-  else if (renderProjectsOfSP.classList.contains('second-project')) {
-        renderProjectsOfSP.classList.remove('second-project');
-    renderProjectsOfSP.classList.add('third-project');
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageThirdProject);
-    return
+    const onSwipeStart = (e) => {
+      this._autoplay('stop');
+      const event = e.type.search('touch') === 0 ? e.touches[0] : e;
+      this._swipeX = event.clientX;
+      this._isSwiping = true;
+    };
+    const onSwipeEnd = (e) => {
+      if (!this._isSwiping) {
+        return;
+      }
+      const event = e.type.search('touch') === 0 ? e.changedTouches[0] : e;
+      const diffPos = this._swipeX - event.clientX;
+      if (diffPos > 50) {
+        this._direction = 'next';
+        this._move();
+      } else if (diffPos < -50) {
+        this._direction = 'prev';
+        this._move();
+      }
+      this._isSwiping = false;
+      if (this._config.loop) {
+        this._autoplay();
+      }
+    };
+    if (this._config.swipe) {
+      this._el.addEventListener('touchstart', onSwipeStart);
+      this._el.addEventListener('mousedown', onSwipeStart);
+      document.addEventListener('touchend', onSwipeEnd);
+      document.addEventListener('mouseup', onSwipeEnd);
+    }
+    this._el.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        this._autoplay('stop');
+      } else if (document.visibilityState === 'visible' && this._config.loop) {
+        this._autoplay();
+      }
+    });
   }
-  else if (renderProjectsOfSP.classList.contains('third-project')) {
-    btnRightSP.classList.add('visually-hidden')
-    renderProjectsOfSP.classList.remove('third-project');
-    renderProjectsOfSP.classList.add('fourth-project');
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageFourthProject);
-    return
+
+  _autoplay(action) {
+    if (!this._config.autoplay) {
+      return;
+    }
+    if (action === 'stop') {
+      clearInterval(this._intervalId);
+      this._intervalId = null;
+      return;
+    }
+    if (this._intervalId === null) {
+      this._intervalId = setInterval(() => {
+        this._direction = 'next';
+        this._move();
+      }, this._config.interval);
+    }
   }
-  return
+
+  _balanceItems() {
+    if (!this._isBalancing) {
+      return;
+    }
+    const wrapperRect = this._elWrapper.getBoundingClientRect();
+    const targetWidth = wrapperRect.width / this._countActiveItems / 2;
+    const countItems = this._elsItem.length;
+    if (this._direction === 'next') {
+      const exItemRectRight = this._exItemMin.getBoundingClientRect().right;
+      if (exItemRectRight < wrapperRect.left - targetWidth) {
+        this._exItemMin.dataset.order = this._exOrderMin + countItems;
+        const translate = this._exTranslateMin + countItems * this._widthItem;
+        this._exItemMin.dataset.translate = translate;
+        this._exItemMin.style.transform = `translate3D(${translate}px, 0px, 0.1px)`;
+        this._updateExProperties();
+      }
+    } else {
+      const exItemRectLeft = this._exItemMax.getBoundingClientRect().left;
+      if (exItemRectLeft > wrapperRect.right + targetWidth) {
+        this._exItemMax.dataset.order = this._exOrderMax - countItems;
+        const translate = this._exTranslateMax - countItems * this._widthItem;
+        this._exItemMax.dataset.translate = translate;
+        this._exItemMax.style.transform = `translate3D(${translate}px, 0px, 0.1px)`;
+        this._updateExProperties();
+      }
+    }
+    window.setTimeout(() => {
+      window.requestAnimationFrame(this._balanceItems.bind(this));
+    }, this._delay);
+  }
+
+  _changeActiveItems() {
+    this._stateItems.forEach((item, index) => {
+      if (item) {
+        this._elsItem[index].classList.add(ItcSlider.CLASS_ITEM_ACTIVE);
+      } else {
+        this._elsItem[index].classList.remove(ItcSlider.CLASS_ITEM_ACTIVE);
+      }
+      if (this._elsIndicator.length && item) {
+        this._elsIndicator[index].classList.add(ItcSlider.CLASS_INDICATOR_ACTIVE);
+      } else if (this._elsIndicator.length && !item) {
+        this._elsIndicator[index].classList.remove(ItcSlider.CLASS_INDICATOR_ACTIVE);
+      }
+    });
+  }
+
+  _move() {
+    const widthItem = this._direction === 'next' ? -this._widthItem : this._widthItem;
+    const transform = this._transform + widthItem;
+    if (!this._config.loop) {
+      const limit = this._widthItem * (this._elsItem.length - this._countActiveItems);
+      if (transform < -limit || transform > 0) {
+        return;
+      }
+      if (this._btnPrev) {
+        this._btnPrev.classList.remove(ItcSlider.CLASS_CONTROL_HIDE);
+        this._btnNext.classList.remove(ItcSlider.CLASS_CONTROL_HIDE);
+      }
+      if (this._btnPrev && transform === -limit) {
+        this._btnNext.classList.add(ItcSlider.CLASS_CONTROL_HIDE);
+      } else if (this._btnPrev && transform === 0) {
+        this._btnPrev.classList.add(ItcSlider.CLASS_CONTROL_HIDE);
+      }
+    }
+    if (this._direction === 'next') {
+      this._stateItems = [...this._stateItems.slice(-1), ...this._stateItems.slice(0, -1)];
+    } else {
+      this._stateItems = [...this._stateItems.slice(1), ...this._stateItems.slice(0, 1)];
+    }
+    this._changeActiveItems();
+    this._transform = transform;
+    this._elItems.style.transform = `translate3D(${transform}px, 0px, 0.1px)`;
+    this._elItems.dispatchEvent(new CustomEvent('itcslider-start', {
+      bubbles: true
+    }));
+  }
+
+  _moveTo(index) {
+    const delta = this._stateItems.reduce((acc, current, currentIndex) => {
+      const diff = current ? index - currentIndex : acc;
+      return Math.abs(diff) < Math.abs(acc) ? diff : acc;
+    }, this._stateItems.length);
+    if (delta !== 0) {
+      this._direction = delta > 0 ? 'next' : 'prev';
+      for (let i = 0; i < Math.abs(delta); i++) {
+        this._move();
+      }
+    }
+  }
+
+  _setInitialValues() {
+    this._transform = 0;
+    this._stateItems = [];
+    this._isBalancing = false;
+    this._widthItem = this._elsItem[0].getBoundingClientRect().width;
+    this._widthWrapper = this._elWrapper.getBoundingClientRect().width;
+    this._countActiveItems = Math.round(this._widthWrapper / this._widthItem);
+    this._elsItem.forEach((el, index) => {
+      el.dataset.index = index;
+      el.dataset.order = index;
+      el.dataset.translate = 0;
+      el.style.transform = '';
+      this._stateItems.push(index < this._countActiveItems ? 1 : 0);
+    });
+    if (this._config.loop) {
+      const lastIndex = this._elsItem.length - 1;
+      const translate = -(lastIndex + 1) * this._widthItem;
+      this._elsItem[lastIndex].dataset.order = -1;
+      this._elsItem[lastIndex].dataset.translate = translate;
+      this._elsItem[lastIndex].style.transform = `translate3D(${translate}px, 0px, 0.1px)`;
+      this._updateExProperties();
+    } else if (this._btnPrev) {
+      this._btnPrev.classList.add(ItcSlider.CLASS_CONTROL_HIDE);
+    }
+    this._changeActiveItems();
+    this._autoplay();
+  }
+
+  _reset() {
+    const widthItem = this._elsItem[0].getBoundingClientRect().width;
+    const widthWrapper = this._elWrapper.getBoundingClientRect().width;
+    const countActiveEls = Math.round(widthWrapper / widthItem);
+    if (widthItem === this._widthItem && countActiveEls === this._countActiveItems) {
+      return;
+    }
+    this._autoplay('stop');
+    this._elItems.classList.add(ItcSlider.TRANSITION_OFF);
+    this._elItems.style.transform = 'translate3D(0px, 0px, 0.1px)';
+    this._setInitialValues();
+    window.requestAnimationFrame(() => {
+      this._elItems.classList.remove(ItcSlider.TRANSITION_OFF);
+    });
+  }
+
+  _updateExProperties() {
+    const els = Object.values(this._elsItem).map((el) => el);
+    const orders = els.map((item) => Number(item.dataset.order));
+    this._exOrderMin = Math.min(...orders);
+    this._exOrderMax = Math.max(...orders);
+    const min = orders.indexOf(this._exOrderMin);
+    const max = orders.indexOf(this._exOrderMax);
+    this._exItemMin = els[min];
+    this._exItemMax = els[max];
+    this._exTranslateMin = Number(this._exItemMin.dataset.translate);
+    this._exTranslateMax = Number(this._exItemMax.dataset.translate);
+  }
+
+  next() {
+    this._direction = 'next';
+    this._move();
+  }
+  prev() {
+    this._direction = 'prev';
+    this._move();
+  }
+  moveTo(index) {
+    this._moveTo(index);
+  }
+  reset() {
+    this._reset();
+  }
 }
 
-function renderPreviousPageProjectsSP() {
-  if (renderProjectsOfSP.classList.contains('fourth-project')) {
-    btnRightSP.classList.remove('visually-hidden');
-    renderProjectsOfSP.classList.add('third-project');
-    renderProjectsOfSP.classList.remove('fourth-project');
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageThirdProject);
-    return
-  } else if (renderProjectsOfSP.classList.contains('third-project')) {
-    renderProjectsOfSP.classList.add('second-project');
-    renderProjectsOfSP.classList.remove('third-project');
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageSecondProject);
-    return
-  } else if (renderProjectsOfSP.classList.contains('second-project')) {
-    renderProjectsOfSP.classList.add('first-project');
-    renderProjectsOfSP.classList.remove('second-project');
-    renderProjectsOfSP.innerHTML = '';
-    renderProjectsOfSP.insertAdjacentHTML('beforeend', secondPageFirstProject);  
-    btnLeftSP.classList.add('visually-hidden');
-    return
-  }
-  return
-}
+document.addEventListener('DOMContentLoaded', () => {
+new ItcSlider('.slider')});
+
+

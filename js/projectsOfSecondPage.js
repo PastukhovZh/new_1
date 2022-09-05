@@ -88,8 +88,8 @@ const secondPageFourthProject = `<div class="render-sp-wrap first-project">
       </div>`
 
 const renderProjectsOfSP = document.querySelector('.render-sp-wrap')
-const btnRight = document.querySelector("[data-button-right-sp");
-const btnLeft = document.querySelector("[data-button-left-sp");
+const btnRightSP = document.querySelector("[data-button-right-sp");
+const btnLeftSP = document.querySelector("[data-button-left-sp");
 
 btnRightSP.addEventListener('click', renderNextPageProjectsSP);
 btnLeftSP.addEventListener('click', renderPreviousPageProjectsSP);

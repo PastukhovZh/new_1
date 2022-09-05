@@ -1,3 +1,7 @@
+.her {
+  max-width: 1440px;
+  margin: 0 auto;
+}
 .hero {
   width: 1440px;
   height: 900px;
@@ -14,13 +18,43 @@
   background-size: contain;
 }
 
+.hero2 {
+  width: 1440px;
+  height: 900px;
+
+  background-image: linear-gradient(
+      135.35deg,
+      rgba(72, 72, 72, 0.2) 22.93%,
+      rgba(72, 72, 72, 0) 37.65%
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+    url(../image/hero/hero-title-2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.hero3 {
+  width: 1440px;
+  height: 900px;
+
+  background-image: linear-gradient(
+      135.35deg,
+      rgba(72, 72, 72, 0.2) 22.93%,
+      rgba(72, 72, 72, 0) 37.65%
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+    url(../image/hero/hero-title-3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .hero-title {
   min-width: 1021px;
   font-weight: var(--title-font-weight);
-  font-size: 128px;
-  line-height: 150px;
+  font-size: 80px;
+  line-height: 94px;
   padding-top: 331px;
-  padding-left: 100px;
+  padding-left: 250px;
 
   background: linear-gradient(
     90.96deg,
@@ -33,7 +67,7 @@
   text-fill-color: transparent;
 
   .hero-title-part {
-    font-size: 80px;
-    line-height: 94px;
+    font-size: 128px;
+    line-height: 150px;
   }
 }
