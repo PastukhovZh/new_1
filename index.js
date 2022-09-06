@@ -341,7 +341,11 @@ class ItcSlider {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-new ItcSlider('.slider')});
+// document.addEventListener('DOMContentLoaded', () => {
+//   new ItcSlider('.slider')
+// });
 
-
+new ItcSlider('.slider', {
+  loop: false, // без зацикливания
+  swipe: false // без свайпа
+});
