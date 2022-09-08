@@ -7,7 +7,12 @@
   justify-content: space-around;
   z-index: 999;
 }
-
+.header-link > button {
+  background-color: transparent;
+}
+.header-link > button > svg {
+  fill: #ffffff;
+}
 .wrap {
   position: absolute;
   display: flex;

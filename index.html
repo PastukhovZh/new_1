@@ -46,8 +46,12 @@
           <div class="header-nav--wrap">
             <nav class="header-nav">
               <ul class="header-list">
-                <li class="header-item">
-                  <a href="" class="header-link">projects</a>
+                <li class="header-item header-link">
+                  projects<button>
+                    <svg width="15px" height="12px">
+                      <use href="./image/icon.svg#icon-arrow-down"></use>
+                    </svg>
+                  </button>
                 </li>
                 <li class="header-item">
                   <a href="" class="header-link">news</a>
@@ -65,7 +69,7 @@
       </div>
     </header>
     <!-- Hero -->
-    <section class="her">
+    <section class="hero">
       <div
         class="slider"
         data-slider="itc-slider"
@@ -75,21 +79,21 @@
         <div class="slider__wrapper">
           <div class="slider__items">
             <div class="slider__item">
-              <div class="hero">
+              <div class="hero-item-1">
                 <h1 class="hero-title">
                   <span class="hero-title-part">BOOKS</span> without borders
                 </h1>
               </div>
             </div>
             <div class="slider__item">
-              <div class="hero2">
+              <div class="hero-item-2">
                 <h1 class="hero-title">
                   stand with<span class="hero-title-part"> UKRAINE</span>
                 </h1>
               </div>
             </div>
             <div class="slider__item">
-              <div class="hero3">
+              <div class="hero-item-3">
                 <h1 class="hero-title">
                   support our <span class="hero-title-part"> CULTURE</span>
                 </h1>
@@ -228,7 +232,9 @@
             On July 1, the project “Ukrainian Bookshelf” started its work in the
             Central Library of the Vilnius City Administration.
           </p>
-          <button type="button" class="news-btn">read more</button>
+          <button type="button" class="news-btn" data-open-modal>
+            read more
+          </button>
         </li>
         <li class="news-item">
           <img
@@ -242,7 +248,9 @@
             Our number one task is to help children who survived the war - Olena
             Zelenska in an interview with TIME weekly.
           </p>
-          <button type="button" class="news-btn">read more</button>
+          <button type="button" class="news-btn" data-open-modal>
+            read more
+          </button>
         </li>
       </ul>
     </section>
@@ -448,49 +456,52 @@
       </div>
       <span class="footer-copyright">© 2022 | All rights reserved</span>
     </footer>
-    <div class="news-modal is-hidden" data-modal>
-      <button class="close-modal" data-close-modal>
-        <svg width="25px" height="25px">
-          <use href="./image/icon.svg#icon-close-btn"></use>
-        </svg>
-      </button>
-      <div class="img">
-        <img src="./image/news/news.jpg" alt="presentation" />
-      </div>
-      <div class="news-modal-wrap">
-        <div class="subtitles-wrap">
-          <span class="news-modal-subtitle">26 June 2022, Vienna</span>
-          <span class="news-modal-subtitle">#bookswithoutborders</span>
+    <div class="backdrop is-hidden" data-modal>
+      <div class="news-modal">
+        <button class="close-modal" data-close-modal>
+          <svg width="25px" height="25px">
+            <use href="./image/icon.svg#icon-close-btn"></use>
+          </svg>
+        </button>
+        <div class="img">
+          <img src="./image/news/news.jpg" alt="presentation" />
         </div>
-        <div class="news-modal-text-wrap">
-          <p class="news-modal-text">
-            Almost 70,000 books were given to Ukrainian migrant children. As
-            reported by Ukrinform, the Ministry of Culture and Information
-            Policy informed Telegram about this.
-          </p>
-          <p class="news-modal-text">
-            According to the ICIP, about half of the specified amount was given
-            to small Ukrainians who were forced to leave the country because of
-            the war.
-          </p>
-          <p class="news-modal-text">
-            In particular, 25,000 books were sent to Poland, almost 5,000 to
-            Austria, over a thousand to Romania, and almost a thousand to
-            Slovakia.
-          </p>
-          <p class="news-modal-text">
-            Another 25,000 books were handed over to the Lviv region for the
-            needs of internally displaced children. 8 thousand books arrived in
-            Kropyvnytskyi, Ternopil, Drohobych, Chernivtsi and
-            Kamianets-Podilskyi.
-          </p>
-          <p class="news-modal-text">
-            As part of the "Books without borders" project, about 30,000
-            Ukrainian-language books have already been printed for children who
-            were forced to leave abroad. In the last week alone, the partners of
-            the Ukrainian Institute printed 10,000 copies of the book.
-          </p>
-          <span class="news-underline"></span>
+        <div class="news-modal-wrap">
+          <div class="subtitles-wrap">
+            <span class="news-modal-subtitle">26 June 2022, Vienna</span>
+            <span class="news-modal-subtitle">#bookswithoutborders</span>
+          </div>
+          <div class="news-modal-text-wrap">
+            <p class="news-modal-text">
+              Almost 70,000 books were given to Ukrainian migrant children. As
+              reported by Ukrinform, the Ministry of Culture and Information
+              Policy informed Telegram about this.
+            </p>
+            <p class="news-modal-text">
+              According to the ICIP, about half of the specified amount was
+              given to small Ukrainians who were forced to leave the country
+              because of the war.
+            </p>
+            <p class="news-modal-text">
+              In particular, 25,000 books were sent to Poland, almost 5,000 to
+              Austria, over a thousand to Romania, and almost a thousand to
+              Slovakia.
+            </p>
+            <p class="news-modal-text">
+              Another 25,000 books were handed over to the Lviv region for the
+              needs of internally displaced children. 8 thousand books arrived
+              in Kropyvnytskyi, Ternopil, Drohobych, Chernivtsi and
+              Kamianets-Podilskyi.
+            </p>
+            <p class="news-modal-text">
+              As part of the "Books without borders" project, about 30,000
+              Ukrainian-language books have already been printed for children
+              who were forced to leave abroad. In the last week alone, the
+              partners of the Ukrainian Institute printed 10,000 copies of the
+              book.
+            </p>
+            <span class="news-underline"></span>
+          </div>
         </div>
       </div>
     </div>
