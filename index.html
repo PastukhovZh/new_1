@@ -448,14 +448,20 @@
       </div>
       <span class="footer-copyright">© 2022 | All rights reserved</span>
     </footer>
-    <div class="news-modal container" data-modal>
-      <button class="close-modal" data-close-modal>X</button>
+    <div class="news-modal is-hidden" data-modal>
+      <button class="close-modal" data-close-modal>
+        <svg width="25px" height="25px">
+          <use href="./image/icon.svg#icon-close-btn"></use>
+        </svg>
+      </button>
       <div class="img">
-        <img src="./image/news/news.jpg" alt="" width="708" height="800" />
+        <img src="./image/news/news.jpg" alt="presentation" />
       </div>
       <div class="news-modal-wrap">
-        <span class="news-modal-subtitle">26 June 2022, Vienna</span>
-        <span class="news-modal-subtitle">#bookswithoutborders</span>
+        <div class="subtitles-wrap">
+          <span class="news-modal-subtitle">26 June 2022, Vienna</span>
+          <span class="news-modal-subtitle">#bookswithoutborders</span>
+        </div>
         <div class="news-modal-text-wrap">
           <p class="news-modal-text">
             Almost 70,000 books were given to Ukrainian migrant children. As
@@ -484,12 +490,12 @@
             were forced to leave abroad. In the last week alone, the partners of
             the Ukrainian Institute printed 10,000 copies of the book.
           </p>
-
           <span class="news-underline"></span>
         </div>
       </div>
     </div>
     <script src="./index.js" type="module"></script>
+    <script src="./js/news.js" type="module"></script>
     <script src="./js/projectsOfFirstPage.js" type="module"></script>
     <script src="./js/projectsOfSecondPage.js" type="module"></script>
     <script src="./js/renderMap.js" type="module"></script>

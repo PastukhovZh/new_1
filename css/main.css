@@ -75,6 +75,12 @@ textarea {
   overflow: hidden;
 }
 
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 :root {
   --basic-font: "Roboto", sans-serif;
   --basic-font-weight: 400;
@@ -101,7 +107,41 @@ textarea {
 }
 
 .news-modal {
+  position: relative;
   display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.close-modal {
+  position: absolute;
+  right: 33px;
+  top: 20px;
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img > img {
+  width: 708px;
+  height: 800px;
+}
+
+.news-modal-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: 104px;
+  justify-content: center;
+}
+
+.subtitles-wrap {
+  display: flex;
+  margin-bottom: 53px;
 }
 
 .news-modal-subtitle {
@@ -118,11 +158,18 @@ textarea {
   border-radius: 17px;
   color: #4d4d4d;
 }
+.news-modal-subtitle:last-child {
+  margin-left: 26px;
+  background-color: rgba(150, 242, 248, 0.5);
+}
 
 .news-modal-text {
   font-weight: var(--basic-font-weight);
   font-size: 18px;
   line-height: 21px;
+}
+.news-modal-text:nth-child(-n+4) {
+  margin-bottom: 22px;
 }
 
 .news-underline {
@@ -133,10 +180,11 @@ textarea {
   top: 715px;
   background-color: #96f2f8;
   border: 1px solid #96f2f8;
+  margin-top: 53px;
 }
 
 .news-modal-text-wrap {
-  padding: 222 75 85 104;
+  width: 553px;
 }
 
 .her {
